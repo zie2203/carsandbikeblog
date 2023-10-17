@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title  %}Cars&Bikes {% endblock %}
+{% block style  %}
+{% endblock %}
+
+{% if search_term %}
+     <h2>You searched for:{{search_term}}</h2>
+{% endif %}
+{% block body  %}
+<br><br>
+<span class="badge text-black bg-secondary">
+       <h1>List of Cars </h1>
+</span>
+<br><br>
+    {% for posts in postlist %}
+            <h3>{{posts.post_title}}</h3>
+            <img width="200" src="media/{{posts.post_image}}"><br/>
+            <h6 class="text-secondary">Posted by {{posts.post_author}} on {{posts.post_published_date_time}}</h6>
+            <a href="{% url 'home_path' %}post_details/{{posts.id}}">
+                <button type="button" class="btn btn-secondary">View post</button>
+            </a>
+             <br><br>
+    {% endfor %}
+    {% include "account/pagination.html"  with page=postlist %}
+{% endblock %}

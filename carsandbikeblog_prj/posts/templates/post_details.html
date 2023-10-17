@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title  %}Details {% endblock %}
+{% block body  %}
+<div class="container m-5">
+    <h2>{{posts.post_title}}</h2>
+    <h6 class="text-secondary">Posted by{{posts.post_author}} on {{posts.post_published_date_time}}</h6>
+    <img width="200" src="{% url 'home_path' %}media/{{posts.post_image}}"><br/>
+    <p>{{posts.post_description}}</p>
+    <a href="{% url 'home_path' %}">
+        <button type="button" class="btn btn-success">Go Back</button>
+    </a>
+    {% if posts.post_author == request.user %}
+        <a href="{% url 'home_path' %}accounts/edit_post/{{posts.id}}">
+            <button type="button" class="btn btn-success">Modify</button>
+        </a>
+        <a href="{% url 'home_path' %}accounts/delete_post/{{posts.id}}">
+            <button type="button" class="btn btn-danger">Delete</button>
+        </a>
+    {% endif %}
+    <br><br>
+  {% if review_details %}
+    {% for review in review_details %}
+        {% if review.video_url %}
+            <div class="embed-responsive embed-responsive-21by9">
+                <iframe class="embed-responsive-item" src="{{review.video_url}}" allowfullscreen type="text/html"></iframe>
+            </div>
+        {% endif %}
+    <h5>Title: {{review.title}}</h5>
+    <h6>Rating: {{review.rating}}</h6>
+    <h6> {{review.description}}</h6>
+    <h6>Author: {{review.review_author}}</h6>
+    {% endfor %}
+  {% endif %}
+    {% if request.user.is_authenticated %}
+    {% if user.groups.all.0.name == "reviewers" %}
+    <a href="{% url 'home_path' %}accounts/add_review/{{posts.id}}">
+            <button type="button" class="btn btn-success">Add review</button>
+    </a>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock  %}

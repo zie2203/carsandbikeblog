@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title  %}editnewpost{% endblock %}
+{% block body  %}
+<div class="container m-5">
+    <h3>Edit Post</h3>
+    <br>
+  <form action="" method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {{edit_post_form.as_p}}
+    <input type="submit" value="Update Post" class="btn btn-success">
+  </form>
+    <a href="{% url 'home_path' %}">
+        <button type="button" class="btn btn-success">Go Back</button>
+    </a>
+</div>
+{% endblock  %}

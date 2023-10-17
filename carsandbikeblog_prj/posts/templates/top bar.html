@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar bg-dark navbar-expand-lg">
+  <div class="container">
+    <a class=" text-light navbar-brand" href="#">Cars&bikes</a>
+    <img src= 'media\posts\images\logo.png' alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <br><br>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="text-light nav-link active" aria-current="page" href="{% url 'home_path' %}">Home</a>
+        </li>
+        {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="text-light nav-link" href="#">Welcome {{request.user.username}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="text-light nav-link" href="{% url 'add_post' %}">Add post</a>
+            </li>
+            <li class="nav-item">
+              <a class="text-light nav-link" href="{% url 'password_change' %}">Password reset</a>
+            </li>
+            <li class="nav-item">
+              <a class="text-light nav-link" href="{% url 'logout' %}">Log out</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+              <a class="text-light nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="text-light nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="text-light nav-link" href="{% url 'register_reviewer' %}">Register as Reviewer</a>
+            </li>
+        {% endif %}
+
+      </ul>
+      <form class="d-flex" action="" role="search">
+        <input name="searchpost" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-secondary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+</body>
+</html>

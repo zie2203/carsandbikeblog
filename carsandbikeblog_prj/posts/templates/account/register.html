@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title  %}user registration{% endblock %}
+{% block body  %}
+<div class="container m-5">
+    <h3>Please Register</h3>
+    <br>
+  <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{user_reg_form.as_p}}
+    <input type="submit" value="Register" class="btn btn-success">
+  </form>
+</div>
+{% endblock  %}
